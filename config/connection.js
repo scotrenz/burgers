@@ -1,15 +1,19 @@
 var mysql = require("mysql");
 
-// if(process.env.JAWSDB_URL){
- var connection = mysql.createConnection('mysql://golthvidmihgc3e2:zbp98rynaylj7bkg@tuy8t6uuvh43khkk.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/l0385bsfgih7u0ul');
-// } else{
-//   connection = mysql.createConnection({
-//     host: "localhost",
-//     user: "scot",
-//     password: "password",
-//     database: "burgers_db"
-//   });
-// };
+var connection;
+if(process.env.JAWSDB_URL) {
+  //Heroku deployment
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  //local host
+    connection = mysql.createConnection({
+        root: 3000,
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "db_name",
+    });
+};
 
 connection.connect(function(err) {
   if (err) {
